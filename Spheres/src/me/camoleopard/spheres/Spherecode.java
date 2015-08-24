@@ -21,7 +21,7 @@ import com.massivecraft.factions.entity.MPlayer;
 import de.slikey.effectlib.EffectManager;
 import de.slikey.effectlib.effect.SphereEffect;
 import de.slikey.effectlib.util.ParticleEffect;
-public class Listeners implements Listener {
+public class Spherecode implements Listener {
 	EffectManager em = Main.em;
 	
 	public static List<Player> players = new ArrayList<Player>();
