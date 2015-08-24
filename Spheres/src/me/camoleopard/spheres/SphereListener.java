@@ -3,7 +3,6 @@ package me.camoleopard.spheres;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,7 +20,8 @@ import com.massivecraft.factions.entity.MPlayer;
 import de.slikey.effectlib.EffectManager;
 import de.slikey.effectlib.effect.SphereEffect;
 import de.slikey.effectlib.util.ParticleEffect;
-public class Spherecode implements Listener {
+public class SphereListener implements Listener {
+	
 	EffectManager em = Main.em;
 	
 	public static List<Player> players = new ArrayList<Player>();

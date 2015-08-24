@@ -34,18 +34,14 @@ public class Main<Return> extends JavaPlugin implements Listener {
 	public static List<Player> players = new ArrayList<Player>();
 	
 	public void onEnable(){
-		Bukkit.getServer().getPluginManager().registerEvents(this, this);
+		Bukkit.getServer().getPluginManager().registerEvents(new SphereListener(), this);
 		em = new EffectManager(this);
 	}
 	
 	public void onDisable(){
 		
 	}
-  public EffectManager effectmanager(){
-		
-		return em;
-	}
-	
+ 
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		
