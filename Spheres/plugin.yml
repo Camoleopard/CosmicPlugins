@@ -1,0 +1,9 @@
+name: Spheres
+description: A small plugin
+author: Camoleopard
+commands:
+  sphere:
+    description: gives equipment
+version: 1.0
+main: me.camoleopard.spheres.Main
+depend: [Factions]
