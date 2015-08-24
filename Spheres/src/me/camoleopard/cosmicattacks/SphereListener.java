@@ -1,4 +1,4 @@
-package me.camoleopard.spheres;
+package me.camoleopard.cosmicattacks;
 
 import java.util.ArrayList;
 import java.util.List;
