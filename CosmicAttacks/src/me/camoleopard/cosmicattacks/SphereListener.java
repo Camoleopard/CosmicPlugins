@@ -37,7 +37,7 @@ public class SphereListener implements Listener {
 		Boolean sphereIsActive;
 		
 		ItemStack sphere = new ItemStack(Material.DIAMOND);
-		String name = "Sphere";
+		String name = "§b§3Sphere";
 		ItemMeta spheremeta = sphere.getItemMeta();
 		spheremeta.setDisplayName(name);
 		sphere.setItemMeta(spheremeta);
@@ -46,7 +46,7 @@ public class SphereListener implements Listener {
 		
 		
 		
-		if(e.getItem().getItemMeta().getDisplayName() == "Sphere"){
+		if(e.getItem().getItemMeta().getDisplayName() == "§b§3Sphere"){
 			if(e.getAction() == Action.LEFT_CLICK_AIR ||e.getAction() == Action.LEFT_CLICK_BLOCK||e.getAction() == Action.RIGHT_CLICK_AIR||e.getAction() == Action.RIGHT_CLICK_BLOCK){
 			sphereIsActive = true;
 			SphereEffect effect = new SphereEffect(em);
