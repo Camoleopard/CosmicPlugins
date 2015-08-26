@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -21,7 +22,7 @@ public class RedSandListener implements Listener {
 		ItemMeta itemmeta = redsand.getItemMeta();
 		itemmeta.setDisplayName("Red Sand Bomb");
 		redsand.setItemMeta(itemmeta);
-		if(e.getBlockPlaced().getDrops().contains(redsand)){
+		if(e.getBlockPlaced().getDrops().contains(redsand) && e.getBlock().getType() == Material.SAND){
 		Player p = e.getPlayer();
 		List<Entity> entity = p.getNearbyEntities(10, 10, 10);
 		for(Entity ee : entity){
@@ -45,7 +46,8 @@ public class RedSandListener implements Listener {
 		if(fb.getMaterial() == Material.SAND && e.getBlock().getDrops() == redsand && fb.getCustomName() == "RedSandBomb"){
 		fb.setDropItem(true);
 		Location explode = fb.getLocation();
-		
+		Entity tnt = fb.getWorld().spawn(explode, TNTPrimed.class);
+		((TNTPrimed)tnt).setFuseTicks(0);
 		
 			
 		}
