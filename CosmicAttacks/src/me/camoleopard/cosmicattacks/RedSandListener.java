@@ -39,7 +39,7 @@ public class RedSandListener implements Listener {
 	public void onBlockLand(EntityChangeBlockEvent e){
 		if(e.getEntity() instanceof FallingBlock){
 		FallingBlock fb = (FallingBlock)e.getEntity();
-		ItemStack redsand = new ItemStack( Material.SAND, (short) 1, (byte) 1 );
+		ItemStack redsand = new ItemStack( Material.SAND, (short) 1, (byte) 2 );
 		ItemMeta itemmeta = redsand.getItemMeta();
 		itemmeta.setDisplayName("Red Sand Bomb");
 		redsand.setItemMeta(itemmeta);
