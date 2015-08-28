@@ -58,7 +58,7 @@ public class Main<Return> extends JavaPlugin implements Listener {
 			}
 		
 		
-		return true;	
+		return false;	
 	}
 	
 	
