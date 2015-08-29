@@ -5,5 +5,5 @@ commands:
   sphere:
     description: gives equipment
 version: 1.0
-main: me.camoleopard.spheres.Main
+main: me.camoleopard.cosmicattacks.Main
 depend: [Factions]
