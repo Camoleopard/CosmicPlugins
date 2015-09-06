@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="/Users/181095/Downloads/Factions.jar"/>
 	<classpathentry kind="lib" path="/Users/181095/Downloads/MassiveCore.jar"/>
 	<classpathentry kind="lib" path="/Users/181095/Downloads/EffectLib-3.2.jar"/>
+	<classpathentry kind="lib" path="/Users/181095/Downloads/tUtils.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -28,16 +29,34 @@ public static List<Player> getPlayersInRadius(Player p, int radius){
 		return players;
 		
 	}
-public static void createDisplay(Material material, Inventory inv, int Slot, String name, String lore) {
-ItemStack item = new ItemStack(material);
-ItemMeta meta = item.getItemMeta();
-meta.setDisplayName(name);
-ArrayList<String> Lore = new ArrayList<String>();
-Lore.add(lore);
-meta.setLore(Lore);
-item.setItemMeta(meta);
+public static void createDisplay(Material material, Inventory inv,int slot, String name, String lore) {
+	ItemStack item = new ItemStack(material);
+	ItemMeta meta = item.getItemMeta();
+	meta.setDisplayName(name);
+	ArrayList<String> description = new ArrayList<String>();
+	description.add(lore);
+	meta.setLore(description);
+	item.setItemMeta(meta);
+	inv.setItem(slot, item);
+}
+public static Location str2loc(String str){
+	 
+    String str2loc[]=str.split("\\:");
  
-inv.setItem(Slot, item); 
+    Location loc = new Location(Bukkit.getServer().getWorld(str2loc[0]),0,0,0);
+ 
+    loc.setX(Double.parseDouble(str2loc[1]));
+ 
+    loc.setY(Double.parseDouble(str2loc[2]));
+ 
+    loc.setZ(Double.parseDouble(str2loc[3]));
+ 
+    return loc;
+ 
+}
+public static String loc2str(Location loc){
+	 
+    return loc.getWorld().getName()+":"+loc.getBlockX()+":"+loc.getBlockY()+":"+loc.getBlockZ();
  
 }
 
