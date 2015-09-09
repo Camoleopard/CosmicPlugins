@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 import me.camoleopard.betterfactions.ItemGenerator.ItemEnum;
+import me.camoleopard.toolbox.KitCollection;
+import me.camoleopard.toolbox.Timer;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,9 +17,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import util.KitCollection;
-import util.Timer;
 
 public class CustomKits implements Listener{
 	
