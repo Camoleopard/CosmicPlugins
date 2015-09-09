@@ -1,9 +1,15 @@
-name: Spheres
+name: BetterFactions
 description: A small plugin
-author: Camoleopard
+author: Camoleopard and Moulberry
 commands:
   sphere:
     description: gives equipment
+  cenchant:
+    description: Gives an enchanted item
+  tnt:
+    description: Summons special tnt!
+  kit:
+    description: Gives you kit items!
 version: 1.0
-main: me.camoleopard.spheres.Main
+main: me.camoleopard.betterfactions.BetterFactions
 depend: [Factions]

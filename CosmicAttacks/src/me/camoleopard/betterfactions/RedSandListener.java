@@ -1,4 +1,4 @@
-package me.camoleopard.cosmicattacks;
+package me.camoleopard.betterfactions;
 
 import java.util.List;
 

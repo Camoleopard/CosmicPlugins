@@ -1,4 +1,4 @@
-package me.camoleopard.cosmicattacks;
+package me.camoleopard.betterfactions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,71 +11,55 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import util.utils;
 
 import com.massivecraft.factions.Rel;
 import com.massivecraft.factions.entity.MPlayer;
 
-import de.slikey.effectlib.EffectManager;
 import de.slikey.effectlib.effect.SphereEffect;
 import de.slikey.effectlib.util.ParticleEffect;
 public class SphereListener implements Listener {
 	
-	EffectManager em = Main.em;
+	public static List<Player> players = new ArrayList<Player>();	
+	public static JavaPlugin owningPlugin = null;
 	
-	public static List<Player> players = new ArrayList<Player>();
-	
-	
+	public SphereListener(JavaPlugin jPlugin) {
+		owningPlugin = jPlugin;
+	}
 
-	
-	
-	
-	
 	@EventHandler
 	public void clickEvent(PlayerInteractEvent e){
-		Boolean sphereIsActive;
-		
 		ItemStack sphere = new ItemStack(Material.DIAMOND);
-		String name = "§b§3Sphere";
+		String name = "�3Sphere";
 		ItemMeta spheremeta = sphere.getItemMeta();
 		spheremeta.setDisplayName(name);
 		sphere.setItemMeta(spheremeta);
 		
 		Player p = e.getPlayer();
 		
-		
-		
-		if(e.getItem().getItemMeta().getDisplayName() == "§b§3Sphere"){
+		if(e.getItem().getItemMeta().getDisplayName()!=null && e.getItem().getItemMeta().getDisplayName().equals("�3Sphere")){
 			if(e.getAction() == Action.LEFT_CLICK_AIR ||e.getAction() == Action.LEFT_CLICK_BLOCK||e.getAction() == Action.RIGHT_CLICK_AIR||e.getAction() == Action.RIGHT_CLICK_BLOCK){
-			sphereIsActive = true;
-			SphereEffect effect = new SphereEffect(em);
-			effect.radius = 10;
-			effect.iterations = 5*20;
-			effect.particle = ParticleEffect.FLAME;
-			effect.setEntity(p);
-			effect.start();
-			
-			
-			
-			
-			
-			if(effect.isDone()){
-				sphereIsActive = false;
+
+				SphereEffect effect = new SphereEffect(BetterFactions.em);
+				effect.radius = 10;
+				effect.iterations = 5*20;
+				effect.particle = ParticleEffect.FLAME;
+				effect.setEntity(p);
+				effect.start();
+				
 			}
-		if(sphereIsActive){	
-		for(Player pp : utils.getPlayersInRadius(p,10)){
-			Rel relationship = MPlayer.get(p).getRelationTo(MPlayer.get(pp));
 			
-		if(!(relationship.isFriend()) && sphereIsActive ){
-		pp.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 20, 1));
-		}
-		
-		}
-		
-		}
-		
-		}
+			for(Player pp : utils.getPlayersInRadius(p,10)){
+				Rel relationship = MPlayer.get(p).getRelationTo(MPlayer.get(pp));
+				
+				if(!(relationship.isFriend()) ){
+					pp.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 20, 1));
+				}	
+			}
 		}
 	}
 }
