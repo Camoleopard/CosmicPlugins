@@ -13,8 +13,10 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
@@ -107,11 +109,31 @@ public class CustomTNTModule implements Listener{
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public static void onBlockPlace(BlockPlaceEvent e){
 		switch(e.getPlayer().getInventory().getItemInHand().getItemMeta().getLore().get(0)){
 			case "A rare, high tech piece of TNT that disperses nanobots to deconstruct nearby blocks, ":
-				
+				e.getBlockPlaced().setType(Material.TNT);
+				e.getBlockPlaced().setData((byte)0);
+				e.getBlockPlaced().setMetadata("customTnt", new FixedMetadataValue(owningPlugin, "deconstruction"));
+		}
+	}
+	
+	@EventHandler
+	public void onItemClick(PlayerInteractEvent e){
+		if(e.getAction() == Action.RIGHT_CLICK_BLOCK){
+			if(e.getClickedBlock().getType().equals(Material.TNT)){
+				if(e.getPlayer().getInventory().getItemInHand().getType().equals(Material.FLINT_AND_STEEL)){
+					if(e.getClickedBlock().hasMetadata("customTnt")){
+						e.setCancelled(true);
+						e.getClickedBlock().setType(Material.AIR);
+						Location loc = e.getClickedBlock().getLocation();
+						TNTPrimed entity = e.getClickedBlock().getWorld().spawn(new Location(e.getClickedBlock().getWorld(), loc.getBlockX()+0.5, loc.getBlockY(), loc.getBlockZ()+0.5), TNTPrimed.class);
+						entity.setMetadata("customTnt", new FixedMetadataValue(owningPlugin, e.getClickedBlock().getMetadata("customTnt").get(0).asString()));
+					}
+				}
+			}
 		}
 	}
 }

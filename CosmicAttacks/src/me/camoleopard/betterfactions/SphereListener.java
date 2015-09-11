@@ -3,7 +3,7 @@ package me.camoleopard.betterfactions;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.camoleopard.toolbox.utils;
+import me.camoleopard.toolbox.Util;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -53,7 +53,7 @@ public class SphereListener implements Listener {
 				
 			}
 			
-			for(Player pp : utils.getPlayersInRadius(p,10)){
+			for(Player pp : Util.getPlayersInRadius(p,10)){
 				Rel relationship = MPlayer.get(p).getRelationTo(MPlayer.get(pp));
 				
 				if(!(relationship.isFriend()) ){

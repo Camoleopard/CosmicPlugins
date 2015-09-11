@@ -31,7 +31,7 @@ public class BetterFactions extends JavaPlugin{
 		Bukkit.getServer().getPluginManager().registerEvents(new CustomEnchantModule(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new CustomTNTModule(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new MiscModule(this), this);
-		Bukkit.getServer().getPluginManager().registerEvents(new CustomKits(), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new CustomKits(this), this);
 	}
 	
 	public void onDisable(){
@@ -74,7 +74,7 @@ public class BetterFactions extends JavaPlugin{
 		}
 		
 		if(cmd.getName().equalsIgnoreCase("kit")){
-			CustomKits.requestKit((Player)sender, args[0], this);
+			CustomKits.openKitMenu((Player)sender);
 		}
 		
 		

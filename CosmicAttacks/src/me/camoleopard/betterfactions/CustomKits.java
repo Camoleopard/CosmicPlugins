@@ -7,23 +7,60 @@ import java.util.Random;
 import me.camoleopard.betterfactions.ItemGenerator.ItemEnum;
 import me.camoleopard.toolbox.KitCollection;
 import me.camoleopard.toolbox.Timer;
+import me.camoleopard.toolbox.Util;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CustomKits implements Listener{
 	
 	public static List<KitCollection> playersUsedKits = new ArrayList<KitCollection>();
 	private static Random rand = new Random();
+	public static JavaPlugin owningPlugin = null;
 	
-	public static boolean requestKit(Player p, String kitName, JavaPlugin main){
+	public CustomKits(JavaPlugin jPlugin) {
+		owningPlugin = jPlugin;
+	}
+
+	public static void openKitMenu(Player pl) {
+		ItemStack starter = new ItemStack(Material.CARROT_ITEM);
+		ItemMeta itemMeta = starter.getItemMeta();
+		itemMeta.setDisplayName("§r§7§lBasic");
+		for(KitCollection kc : playersUsedKits){
+			if(kc.player==pl){
+				long maxTime = kc.timer.getInterval()/Timer.secondsToNano(1);
+				double percent = kc.timer.getPercentageCompleted();
+				starter.setAmount((int)(maxTime-Math.floor(percent*maxTime)));
+			}
+		}
+		starter.setItemMeta(itemMeta);
+		
+		ItemStack[] itemstacks = {starter};
+		Util.createMenu(pl, "Kit Selector", 9, itemstacks);
+	}
+	
+	@EventHandler
+	public void onInventoryClick(InventoryClickEvent e){
+		if(!e.getInventory().getName().equals("Kit Selector"))
+			return;
+		
+		if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§r§7§lBasic")){
+			e.setCancelled(true);
+			e.getWhoClicked().closeInventory();
+			requestKit((Player)e.getWhoClicked(), "starter");
+		}
+	}
+
+	public static boolean requestKit(Player p, String kitName){
 		System.out.println(playersUsedKits);
 		for(KitCollection kc : playersUsedKits){
 			if(kc.player==p){
@@ -59,11 +96,8 @@ public class CustomKits implements Listener{
 	
 	@EventHandler
 	public void onItemClick(PlayerInteractEvent e){
-		
-		if(e.getItem()==null)
-			return;
-		
-		if(e.getAction() == Action.LEFT_CLICK_AIR ||e.getAction() == Action.LEFT_CLICK_BLOCK||e.getAction() == Action.RIGHT_CLICK_AIR||e.getAction() == Action.RIGHT_CLICK_BLOCK){
+		try{
+			if(e.getAction() == Action.LEFT_CLICK_AIR ||e.getAction() == Action.LEFT_CLICK_BLOCK||e.getAction() == Action.RIGHT_CLICK_AIR||e.getAction() == Action.RIGHT_CLICK_BLOCK){
 				if(e.getPlayer().getInventory().getItemInHand().getItemMeta().getLore().get(0).equals("Gives a random amount of a random piece of custom tnt!")){
 					switch(rand.nextInt(4)){
 						case 0:
@@ -87,6 +121,7 @@ public class CustomKits implements Listener{
 					}
 					e.setCancelled(true);
 				}
-		}
+			}
+		}catch(NullPointerException npe){}
 	}
 }

@@ -29,23 +29,25 @@ public class CustomEnchantModule implements Listener {
 	
 	@EventHandler
 	public void entityDamageByEntityHandler(EntityDamageByEntityEvent e){
-		if(((Player)e.getDamager()).getItemInHand() != null){
-			for(String lore:((Player)e.getDamager()).getInventory().getItemInHand().getItemMeta().getLore()){
-				int level = 0;
-				for(Character c:lore.toLowerCase().toCharArray()){
-					if(c.equals('i'))
-						level++;
-				}
-				
-				if(lore.toLowerCase().contains("tipped blade")){
-					tippedBlade(level-1, e);
-				}
-				
-				if(lore.toLowerCase().contains("thor's wrath")){
-					thorsWrath(level, e);
+		try{
+			if(((Player)e.getDamager()).getItemInHand() != null){
+				for(String lore:((Player)e.getDamager()).getInventory().getItemInHand().getItemMeta().getLore()){
+					int level = 0;
+					for(Character c:lore.toLowerCase().toCharArray()){
+						if(c.equals('i'))
+							level++;
+					}
+					
+					if(lore.toLowerCase().contains("tipped blade")){
+						tippedBlade(level-1, e);
+					}
+					
+					if(lore.toLowerCase().contains("thor's wrath")){
+						thorsWrath(level, e);
+					}
 				}
 			}
-		}
+		}catch(NullPointerException npe){}catch(ClassCastException cce){}
 	}
 	
 	@EventHandler
