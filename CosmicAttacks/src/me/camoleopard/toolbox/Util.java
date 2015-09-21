@@ -2,8 +2,10 @@ package me.camoleopard.toolbox;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -12,8 +14,43 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class Util implements Listener {
+public static JavaPlugin owningPlugin = null;
+	
+	public Util(JavaPlugin jPlugin) {
+		owningPlugin = jPlugin;
+	}
+	
+	public static RandomCollection<ItemStack> setItemsInArray(ItemsEnum ie){
+		RandomCollection<ItemStack> Items = new RandomCollection<ItemStack>();
+		String[] lore = {""};
+		switch(ie){
+		case simpleItem: 
+			List<String> list = owningPlugin.getConfig().getStringList("simple items");
+		for(String str: list){
+		Itemstacktostring.deserial(str);
+		
+		}
+		
+		
+		case uncommonItems:
+		break;
+		default:
+			break;
+		}
+		return Items;
+	}
+	public static ItemStack randomItemInChest(ArrayList<ItemStack> itemArray){
+		Random r = new Random();
+		
+		ArrayList<ItemStack> itemList = itemArray;
+		int selection = r.nextInt(itemList.size());
+		ItemStack item = itemList.get(selection);
+		return item;
+		
+	}
 	
 	public static List<Player> getPlayersInRadius(Player p, int radius){	
 		double maxDist = radius;	
@@ -73,4 +110,8 @@ public class Util implements Listener {
 		
 		player.openInventory(inventory);
 	}
+	public static String format(String input){
+        return ChatColor.translateAlternateColorCodes('&', input);
+    }
+	
 }

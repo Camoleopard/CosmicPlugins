@@ -34,7 +34,7 @@ public class CustomKits implements Listener{
 	public static void openKitMenu(Player pl) {
 		ItemStack starter = new ItemStack(Material.CARROT_ITEM);
 		ItemMeta itemMeta = starter.getItemMeta();
-		itemMeta.setDisplayName("§r§7§lBasic");
+		itemMeta.setDisplayName(Util.format("&r&7&lBasic"));
 		for(KitCollection kc : playersUsedKits){
 			if(kc.player==pl){
 				long maxTime = kc.timer.getInterval()/Timer.secondsToNano(1);
@@ -53,7 +53,7 @@ public class CustomKits implements Listener{
 		if(!e.getInventory().getName().equals("Kit Selector"))
 			return;
 		
-		if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§r§7§lBasic")){
+		if(e.getCurrentItem().getItemMeta().getDisplayName().equals(Util.format("&r&7&lBasic"))){
 			e.setCancelled(true);
 			e.getWhoClicked().closeInventory();
 			requestKit((Player)e.getWhoClicked(), "starter");
@@ -102,21 +102,21 @@ public class CustomKits implements Listener{
 					switch(rand.nextInt(4)){
 						case 0:
 							String[] lore = {"This destructive warhead releases a spray of shrapnel before exploding, ",
-									"dealing small amounts of damage over a large area!","§3Super Rare"};
-							e.getPlayer().getInventory().setItemInHand(ItemGenerator.generateItem(Material.TNT, "§3Shrapnel TNT", rand.nextInt(8)+1, lore));
+									"dealing small amounts of damage over a large area!",Util.format("&3Super Rare")};
+							e.getPlayer().getInventory().setItemInHand(ItemGenerator.generateItem(Material.TNT, Util.format("&3Shrapnel TNT"), rand.nextInt(8)+1, lore,false,null,null));
 							break;
 						case 1:
-							String[] lore2 = {"This TNT is set off by body heat from nearby players or mobs, it does massive amounts of damage!","§3Rare"};
-							e.getPlayer().getInventory().setItemInHand(ItemGenerator.generateItem(Material.TNT, "§3Heat Sensitive TNT", rand.nextInt(24)+1, lore2));
+							String[] lore2 = {"This TNT is set off by body heat from nearby players or mobs, it does massive amounts of damage!",Util.format("&3Rare")};
+							e.getPlayer().getInventory().setItemInHand(ItemGenerator.generateItem(Material.TNT, Util.format("&3Heat Sensitive TNT"), rand.nextInt(24)+1, lore2,false,null,null));
 							break;
 						case 2:
 							String[] lore3 = {"A rare, high tech piece of TNT that disperses nanobots to deconstruct nearby blocks, ",
 									"yielding a very high success rate and will collect spawners",
-									"WARNING: The nanobots cannot operate in liquid, they will die on contact and fail to operate","§3Legendary"};
-							e.getPlayer().getInventory().setItemInHand(ItemGenerator.generateItem(Material.TNT, "§3Deconstruction TNT", rand.nextInt(4)+1, lore3));
+									"WARNING: The nanobots cannot operate in liquid, they will die on contact and fail to operate",Util.format("&3Legendary")};
+							e.getPlayer().getInventory().setItemInHand(ItemGenerator.generateItem(Material.TNT, Util.format("&3Deconstruction TNT"), rand.nextInt(4)+1, lore3,false,null,null));
 							break;
 						case 3:
-							e.getPlayer().getInventory().setItemInHand(ItemGenerator.generateItem(Material.TNT, "TNT", rand.nextInt(48)+1, new String[0]));
+							e.getPlayer().getInventory().setItemInHand(ItemGenerator.generateItem(Material.TNT, "TNT", rand.nextInt(48)+1, new String[0],false,null,null));
 							break;
 					}
 					e.setCancelled(true);

@@ -1,0 +1,19 @@
+name: BetterFactions
+author: Camoleopard and Moulberry
+version: 1.2
+main: me.camoleopard.betterfactions.BetterFactions
+commands:
+  tnt:
+    description: Creates a tnt thingy
+  random:
+    description: testing command
+  cenchant:
+    description: DOes something
+  kit:
+    description: opens kit menu
+  createitem:
+    description: generates item with the args /createitem type name lore amount enchant enchantlevel 
+  senditemtoall:
+    description: sends item in hand to all online players
+  saveitem:
+   description: dev command

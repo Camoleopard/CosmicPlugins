@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class RedSandListener implements Listener {
-	@EventHandler
+	/*@EventHandler
 	public void onPlayerClick(BlockPlaceEvent e){
 		ItemStack redsand = new ItemStack( Material.SAND, (short) 1, (byte) 1 );
 		ItemMeta itemmeta = redsand.getItemMeta();
@@ -35,7 +35,7 @@ public class RedSandListener implements Listener {
 		}
 	}
 	}//*/
-	@EventHandler
+	/*@EventHandler
 	public void onBlockLand(EntityChangeBlockEvent e){
 		if(e.getEntity() instanceof FallingBlock){
 		FallingBlock fb = (FallingBlock)e.getEntity();
@@ -57,5 +57,5 @@ public class RedSandListener implements Listener {
 		}
 	}
 	
-
+*/
 }

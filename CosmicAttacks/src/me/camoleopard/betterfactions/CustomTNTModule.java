@@ -112,11 +112,15 @@ public class CustomTNTModule implements Listener{
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public static void onBlockPlace(BlockPlaceEvent e){
+		if(e.getPlayer().getInventory().getItemInHand().getItemMeta().hasLore()){
 		switch(e.getPlayer().getInventory().getItemInHand().getItemMeta().getLore().get(0)){
 			case "A rare, high tech piece of TNT that disperses nanobots to deconstruct nearby blocks, ":
 				e.getBlockPlaced().setType(Material.TNT);
 				e.getBlockPlaced().setData((byte)0);
 				e.getBlockPlaced().setMetadata("customTnt", new FixedMetadataValue(owningPlugin, "deconstruction"));
+		}
+		}else{
+			
 		}
 	}
 	

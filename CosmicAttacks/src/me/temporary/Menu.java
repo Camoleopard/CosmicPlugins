@@ -10,7 +10,7 @@ public class Menu {
 	
 	public static Inventory createMenu(int Size, String name){
 		Inventory inv = Bukkit.createInventory(null, Size, name);
-		Util.createDisplay(Material.REDSTONE_BLOCK, inv,49,"§bDestroy Beacon", "Destroys Beacon");
+		Util.createDisplay(Material.REDSTONE_BLOCK, inv,49,"Â§bDestroy Beacon", "Destroys Beacon");
 		
 		return inv;
 		
