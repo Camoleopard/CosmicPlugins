@@ -33,6 +33,7 @@ public class BetterFactions extends JavaPlugin implements CommandExecutor{
 	ItemStack sphere = new ItemStack(Material.DIAMOND);
 	
 	public static List<Player> players = new ArrayList<Player>();
+	//public static BetterFactions = this;
 	
 	public void onEnable(){
 		em = new EffectManager(this);

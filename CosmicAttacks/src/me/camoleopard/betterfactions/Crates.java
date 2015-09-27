@@ -10,8 +10,9 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class Crates implements Listener {
+	
 	public void crates(){
-	//()	
+		
 	}
 	
 	@EventHandler

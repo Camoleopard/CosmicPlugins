@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
@@ -26,7 +27,21 @@ public class CustomEnchantModule implements Listener {
 	public CustomEnchantModule(JavaPlugin jPlugin) {
 		owningPlugin = jPlugin;
 	}
-	
+	@EventHandler
+	public void entityDeath(EntityDeathEvent e){
+		if(((Player)e.getEntity().getKiller()).getItemInHand() != null){
+		for(String lore:((Player)e.getEntity().getKiller()).getInventory().getItemInHand().getItemMeta().getLore()){
+			int level = 0;
+			for(Character c:lore.toLowerCase().toCharArray()){
+				if(c.equals('i'))
+					level++;
+			}
+			if(lore.toLowerCase().contains("inquisitive")){
+				inquisitive(level, e);	
+				}
+		}
+		}
+	}
 	@EventHandler
 	public void entityDamageByEntityHandler(EntityDamageByEntityEvent e){
 		try{
@@ -45,7 +60,8 @@ public class CustomEnchantModule implements Listener {
 					if(lore.toLowerCase().contains("thor's wrath")){
 						thorsWrath(level, e);
 					}
-				}
+					
+				}   
 			}
 		}catch(NullPointerException npe){}catch(ClassCastException cce){}
 	}
@@ -124,5 +140,22 @@ public class CustomEnchantModule implements Listener {
 				
 		}
 	}
+@EventHandler
+	public static void inquisitive(int Level, EntityDeathEvent e){
+	CircleEffect effect = new CircleEffect(BetterFactions.em);
+	effect.radius = 3;
+	effect.speed= Level;
+	effect.delay=0;
+	effect.iterations = 20*Level;
+	effect.setEntity(e.getEntity());
+	if(!(e.getEntity() instanceof Player)){
+	Player damager = (Player)e.getEntity().getLastDamageCause().getEntity();
+	
+	int droppedXp = e.getDroppedExp();
+	int level = (int)Math.floor(droppedXp*Level+Level);
+	e.setDroppedExp(level);
+	effect.particle= ParticleEffect.PORTAL;
+	}
 
+}
 }

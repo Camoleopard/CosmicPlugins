@@ -27,4 +27,7 @@ public class RandomCollection<E> {
         double value = random.nextDouble() * total;
         return map.ceilingEntry(value).getValue();
     }
+    public int length(){
+    return map.size();	
+    }
 }
